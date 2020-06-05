@@ -1,0 +1,194 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+<!-- Hello -->
+<category> <pattern>HELLO *</pattern>
+    <template><random>
+            <li> Hello, can I help you with anything?</li>
+            <li>Hi there! Do you need help?</li>
+            <li>Hi, in what can I help you?</li>
+    </random></template></category>
+<category> <pattern>HELLO</pattern>
+    <template><random>
+            <li> Hello, can I help you with anything?</li>
+            <li>Hi there! Do you need help?</li>
+            <li>Hi, in what can I help you?</li>
+    </random></template></category>
+<category> <pattern>HI</pattern>
+    <template><random>
+            <li> Hello, can I help you with anything?</li>
+            <li>Hi there! Do you need help?</li>
+            <li>Hi, in what can I help you?</li>
+    </random></template></category>
+<category> <pattern>HI *</pattern>
+    <template><random>
+            <li> Hello, can I help you with anything?</li>
+            <li>Hi there! Do you need help?</li>
+            <li>Hi, in what can I help you?</li>
+    </random></template></category>
+
+<!-- How are you -->
+<category><pattern>HOW ARE YOU</pattern>
+    <template><think><set name="topic">HOWAREU</set></think><random>
+            <li>I'm good! What about you?</li>
+            <li>I'm fine and you?</li>
+    </random></template></category>
+<category><pattern>ARE YOU ALIRGHT</pattern>
+    <template><think><set name="topic">HOWAREU</set></think><random>
+            <li>I'm good! What about you?</li>
+            <li>I'm fine and you?</li>
+    </random></template></category>
+
+<topic name="HOWAREU"> 
+<!-- user is fine -->
+<category><pattern>IM FINE *</pattern>
+    <template><random>
+          <li>That's nice to hear! How can I help you?</li>
+          <li>That's nice. Do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM ALRIGHT</pattern>
+    <template><random>
+          <li>That's nice to hear! Can I help you?</li>
+          <li>That's nice. Do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM ALRIGHT *</pattern>
+    <template><random>
+          <li>That's nice to hear! Can I help you?</li>
+          <li>That's nice. Do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM FINE</pattern>
+    <template><random>
+          <li>That's nice to hear! Can I help you?</li>
+          <li>That's nice. Do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM GOOD *</pattern>
+   <template><random>
+         <li>That's nice to hear! Can I help you?</li>
+         <li>That's nice. Do you need any help?</li>
+   </random></template></category>
+<category><pattern>IM  GOOD</pattern>
+   <template><random>
+         <li>That's nice to hear! Can I help you?</li>
+         <li>That's nice. Do you need any help?</li>
+   </random></template></category>
+
+
+<!-- user is not okay -->
+<category><pattern>IM SAD</pattern>
+    <template><random>
+        <li>I'm sorry to hear that! Can I help you with anything?</li>
+        <li>I'm sorry, do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM SICK</pattern>
+    <template><random>
+        <li>I'm sorry to hear that! Can I help you with anything?</li>
+        <li>I'm sorry, do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM FEELING AWFUL</pattern>
+    <template><random>
+        <li>I'm sorry to hear that! Can I help you with anything?</li>
+        <li>I'm sorry, do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM SAD *</pattern>
+    <template><random>
+         <li>I'm sorry to hear that! Can I help you with anything?</li>
+         <li>I'm sorry, do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM SICK *</pattern>
+    <template><random>
+         <li>I'm sorry to hear that! Can I help you with anything?</li>
+         <li>I'm sorry, do you need any help?</li>
+    </random></template></category>
+<category><pattern>IM FEELING AWFUL *</pattern>
+    <template><random>
+         <li>I'm sorry to hear that! Can I help you with anything?</li>
+         <li>I'm sorry, do you need any help?</li>
+    </random></template></category>
+</topic>
+
+<!-- User name -->
+<category><pattern> MY NAME IS * </pattern>
+    <template>Hello <set name="nameUser"> <star/></set></template></category>
+<category><pattern> I AM * </pattern>
+    <template>Hello <set name="nameUser"> <star/></set></template></category>
+
+<!-- Bye -->
+<category><pattern> BYE </pattern>
+  <template>#0$Bye <get name="nameUser"/> ! Nice talking to you.</template></category>
+<category><pattern> GOODBYE </pattern>
+  <template>#0$Bye <get name="nameUser"/> ! Nice talking to you.</template></category>
+<category><pattern> EXIT </pattern>
+  <template>#0$Bye <get name="nameUser"/> ! Nice talking to you.</template></category>
+<category><pattern> THATS ALL </pattern>
+  <template>#0$Bye <get name="nameUser"/> ! Nice talking to you.</template></category>
+<category><pattern> THATS ALL * </pattern>
+  <template>#0$Bye <get name="nameUser"/> ! Nice talking to you.</template></category>
+
+<!-- Thanks -->
+<category> <pattern> THANKS </pattern>
+  <template>You are welcome.</template></category>
+<category> <pattern> THANK YOU </pattern>
+  <template><srai>No problem</srai></template></category>
+<category> <pattern> CHEERS </pattern>
+  <template>Sure mate.</template></category>
+<category> <pattern> CHEERS * </pattern>
+  <template>Sure mate.</template></category>
+
+<!--- Wikipedia API -->
+<category><pattern> WHAT IS A * </pattern>
+ <template>#1$<star index="1"/></template></category>
+<category><pattern> WHAT IS AN * </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+<category><pattern> WHAT IS * </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+<category><pattern> DEFINE * </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+<category><pattern> WHO * IS </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+ <category><pattern> WHO IS * </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+<category><pattern> DO YOU KNOW WHO * IS </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+<category><pattern> DO YOU KNOW WHAT A * IS </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+<category><pattern> DO YOU KNOW WHAT AN * IS </pattern>
+ <template><srai>WHAT IS A <star/></srai></template></category>
+
+<!--- Dogs -->
+
+<category><pattern> TELL ME ABOUT * </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> WHAT ABOUT * </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> _ DOGS * </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> _ DOGS </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern>_ DOG * </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern>_ DOG </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> DOGS * </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> DOGS </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> DOG * </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+<category><pattern> DOG </pattern>
+  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
+
+<topic name="DOG">
+<category><pattern> * </pattern>
+  <template>#2$<star index="2"/></template></category> 
+</topic>
+
+<!-- Default reaction -->
+<category><pattern> * </pattern>
+  <template>#99$<star index="1"/></template></category>
+
+<!-- miscelaneus -->
+<category>
+    <pattern>SAY *</pattern>
+    <template><star index="1"/></template>
+</category>
+
+</aiml>
