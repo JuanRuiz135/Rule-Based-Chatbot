@@ -1,5 +1,4 @@
 <aiml version="1.0.1" encoding="UTF-8">
-
 <!-- Hello -->
 <category> <pattern>HELLO *</pattern>
     <template><random>
@@ -128,6 +127,12 @@
   <template>You are welcome.</template></category>
 <category> <pattern> THANK YOU </pattern>
   <template><srai>No problem</srai></template></category>
+<category> <pattern>_ THANKS </pattern>
+  <template>You are welcome.</template></category>
+<category> <pattern> THANKS * </pattern>
+  <template>You are welcome.</template></category>
+<category> <pattern> THANK YOU * </pattern>
+  <template><srai>No problem</srai></template></category>
 <category> <pattern> CHEERS </pattern>
   <template>Sure mate.</template></category>
 <category> <pattern> CHEERS * </pattern>
@@ -181,6 +186,12 @@
   <template>#2$<star index="2"/></template></category> 
 </topic>
 
+<category> <pattern>WHAT CAN YOU DO</pattern>
+    <template>Well, I can talk about dogs, and if you upload a dog image, I can tell you a bit about his breed.</template></category>
+<category> <pattern>WHAT ARE YOU ABLE TO DO</pattern>
+    <template>Well, I can talk about dogs, and if you upload a dog image, I can tell you a bit about his breed.</template></category>
+<category> <pattern>IN WHAT CAN YOU HELP ME</pattern>
+    <template>Well, I can talk about dogs, and if you upload a dog image, I can tell you a bit about his breed.</template></category>
 <!-- Default reaction -->
 <category><pattern> * </pattern>
   <template>#99$<star index="1"/></template></category>
