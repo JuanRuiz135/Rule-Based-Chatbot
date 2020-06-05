@@ -54,7 +54,7 @@ kern.bootstrap(learnFiles="mybot-basic.xml")
 
 from keras.models import load_model
 # load model
-model = load_model('weights.h5')
+model = load_model('classy_weights.h5')
 print('Model loaded')
 # summarize model.
 # model.summary()
@@ -238,6 +238,64 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
            
+ans = ""
+#######################################################
+# Initializer first order logic based agent
+#######################################################
+import nltk
+v = """
+Boran => br
+Berneses => {}
+Huskies => {}
+Sheperds => {}
+Retrievers => {}
+Pomskies => {}
+Bernese => {}
+Husky => {}
+Sheperd => {}
+Retriever => {}
+Pomsky => {}
+Barkers => dr1
+Doggoland => dr2
+Puppies => dr3
+be_in => {}
+are_in => {}
+is_in => {}
+is_named => {}
+"""
+folval = nltk.Valuation.fromstring(v)
+grammar_file = 'simple-sem.fcfg'
+
+objCounter = 0
+# Inserting knowledge
+def sheltersKnowledge():
+    objectCounter = 0
+    dogbreedNum= 0
+    o = 'o' + str(objectCounter)
+    objectCounter += 1
+    #insert type of dog 
+    folval["Pomskies"].add((o,))
+    folval["Berneses"].add((o,))
+    folval["Sheperds"].add((o,))
+    folval["Retrievers"].add((o,))
+    folval["Huskies"].add((o,))
+    folval["Pomsky"].add((o,))
+    folval["Bernese"].add((o,))
+    folval["Sheperd"].add((o,))
+    folval["Retriever"].add((o,))
+    folval["Husky"].add((o,))  
+    if len(folval["be_in"]) == 1: #clean up if necessary
+        if ('',) in folval["be_in"]:
+            folval["be_in"].clear()
+    if dogbreedNum != 10:
+        dogbreedNum = dogbreedNum + 1 
+        folval["be_in"].add((o, folval["Barkers"])) #insert location
+        folval["be_in"].add((o, folval["Doggoland"])) 
+        folval["be_in"].add((o, folval["Puppies"])) 
+
+sheltersKnowledge()
+
+nameCounter = 0
 # Main loop
 
 # Render website
@@ -300,10 +358,132 @@ def get_bot_response():
                     return ans
             elif cmd == 2:
                 userInput=userInput.lower()
-                return response(userInput) 
+                return response(userInput)
+            ######################################################
+            # CFG phrases #
+            ######################################################
+            elif cmd == 4: # I will buy x from y
+                o = 'o' + str(objCounter)
+                folval['o' + o] = o #insert constant
+                if len(folval[params[1]]) == 1: #clean up if necessary
+                    if ('',) in folval[params[1]]:
+                        folval[params[1]].clear()
+                folval[params[1]].add((o,)) #insert dog
+                folval["be_in"].add((o, folval[params[2]])) #insert location
+                g = nltk.Assignment(folval.domain)
+                m = nltk.Model(folval.domain, folval)
+                sent = 'some ' + params[1] + ' are_in ' + params[2]
+                results = nltk.evaluate_sents([sent], grammar_file, m, g)[0][0]
+                if results[2] == True:
+                    ans = "There's some " + params[1] + " in " + params[2] + "."
+                    return ans
+                else:
+                    ans = "No."
+                    return ans
+            elif cmd == 5: #Are there any x in y
+                g = nltk.Assignment(folval.domain)
+                m = nltk.Model(folval.domain, folval)
+                sent = 'some ' + params[1] + ' are_in ' + params[2]
+                results = nltk.evaluate_sents([sent], grammar_file, m, g)[0][0]
+                if results[2] == True:
+                    ans = "Yes. There are some " + params[1] + " in " + params[2] + "."
+                    return ans
+                else:
+                    ans = "No."
+                    return ans
+            elif cmd == 7: # Which dogs are in ...
+                g = nltk.Assignment(folval.domain)
+                m = nltk.Model(folval.domain, folval)
+                e = nltk.Expression.fromstring("be_in(x," + params[1] + ")")
+                sat = m.satisfiers(e, "x", g)
+                counter = 0
+                ans = "The list of dogs available are: "
+                if len(sat) == 0:
+                     ans = "None."
+                     return ans
+                else:
+                    #find satisfying objects in the valuation dictionary,
+                     #and print their type names
+                     sol = folval.values()
+                     for so in sat:
+                         for k, v in folval.items():
+                             if counter == 5:
+                                 return ans
+                                 break
+                             if len(v) > 0:
+                                 vl = list(v)
+                                 if len(vl[0]) == 1:
+                                     for i in vl:
+                                         if i[0] == so:
+                                             if counter == 4:
+                                                 ans = ans + k + ". "
+                                                 counter = counter + 1
+                                             else:
+                                                 ans = ans + k + ", "
+                                                 counter = counter + 1
+                                                 break
+                                                
+                                            
+            elif cmd == 8: # I will buy a x from y
+                o = 'o' + str(objCounter)
+                folval['o' + o] = o #insert constant
+                if len(folval[params[1]]) == 1: #clean up if necessary
+                    if ('',) in folval[params[1]]:
+                        folval[params[1]].clear()
+                folval[params[1]].add((o,)) #insert dog
+                folval["be_in"].add((o, folval[params[2]])) #insert location
+                g = nltk.Assignment(folval.domain)
+                m = nltk.Model(folval.domain, folval)
+                sent = 'some ' + params[1] + ' is_in ' + params[2]
+                results = nltk.evaluate_sents([sent], grammar_file, m, g)[0][0]
+                if results[2] == True:
+                    ans = "Yes. You can buy your " + params[1] + " from " + params[2]
+                    return ans
+                else:
+                    ans = "No."
+                    return ans
+            elif cmd == 9: #Did i buy my x from y
+                g = nltk.Assignment(folval.domain)
+                m = nltk.Model(folval.domain, folval)
+                sent = 'some ' + params[1] + ' is_in ' + params[2]
+                results = nltk.evaluate_sents([sent], grammar_file, m, g)[0][0]
+                if results[2] == True:
+                    ans = "Yes. You said you bought the " + params[1] + " from " + params[2]
+                    return ans
+                else:
+                    ans = "No."
+                    return ans
+            elif cmd == 10: #Did i buy x from y
+                g = nltk.Assignment(folval.domain)
+                m = nltk.Model(folval.domain, folval)
+                sent = 'some ' + params[1] + ' are_in ' + params[2]
+                results = nltk.evaluate_sents([sent], grammar_file, m, g)[0][0]
+                if results[2] == True:
+                    ans = "Yes. You bought your " + params[1] + " from " + params[2]
+                    return ans
+                else:
+                    ans = "No."
+                    return ans
+                
+            elif cmd == 12: # my x is named y
+                o = 'o' + str(objCounter)
+                if len(folval[params[1]]) == 1: #clean up if necessary
+                    if ('',) in folval[params[1]]:
+                        folval[params[1]].clear()
+                #insert name of breed
+                folval[params[1]].add((o,))
+                if len(folval["is_named"]) == 1: #clean up if necessary
+                    if ('',) in folval["is_named"]:
+                        folval["is_named"].clear()
+                folval["is_named"].add((o, folval[params[2]])) # name dog
+                ans = params[2] + " seems like a nice dog."
+                return ans
+                
+                
             elif cmd == 99:
                 ans = "I did not get that, please try again."
                 return ans
+            
         else:
             return answer
         

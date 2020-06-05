@@ -159,7 +159,6 @@
  <template><srai>WHAT IS A <star/></srai></template></category>
 
 <!--- Dogs -->
-
 <category><pattern> TELL ME ABOUT * </pattern>
   <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
 <category><pattern> WHAT ABOUT * </pattern>
@@ -202,4 +201,19 @@
     <template><star index="1"/></template>
 </category>
 
+  <!-- FOL model interface -->
+<category> <pattern> I WILL BUY * FROM * </pattern>
+  <template>#4$<star index="1"/>$<star index="2"/></template></category>
+  <category> <pattern> I WILL BUY A * FROM * </pattern>
+  <template>#8$<star index="1"/>$<star index="2"/></template></category>
+<category> <pattern> ARE THERE ANY * IN * </pattern>
+  <template>#5$<star index="1"/>$<star index="2"/></template></category>
+<category> <pattern> WHICH BREEDS ARE IN * </pattern>
+  <template>#7$<star index="1"/></template></category>
+<category> <pattern> DID I BUY MY * FROM *</pattern>
+  <template>#9$<star index="1"/>$<star index="2"/></template></category>
+<category> <pattern> DID I BUY * FROM *</pattern>
+  <template>#10$<star index="1"/>$<star index="2"/></template></category>
+<category> <pattern> MY * IS NAMED *</pattern>
+  <template>#12$<star index="1"/>$<star index="2"/></template></category>
 </aiml>
