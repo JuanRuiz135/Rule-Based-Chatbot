@@ -159,10 +159,6 @@
  <template><srai>WHAT IS A <star/></srai></template></category>
 
 <!--- Dogs -->
-<category><pattern> TELL ME ABOUT * </pattern>
-  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
-<category><pattern> WHAT ABOUT * </pattern>
-  <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
 <category><pattern> _ DOGS * </pattern>
   <template>#2$<star index="2"/><think><set name="topic">DOG</set></think></template></category>
 <category><pattern> _ DOGS </pattern>
@@ -194,6 +190,19 @@
 <!-- Default reaction -->
 <category><pattern> * </pattern>
   <template>#99$<star index="1"/></template></category>
+<category><pattern> TELL ME ABOUT * </pattern>
+  <template>#99$<star index="1"/></template></category>
+<category><pattern> WHAT ABOUT * </pattern>
+  <template>#99$<star index="1"/></template></category>
+
+<!-- for the genetic algorithm response -->
+<category><pattern> WHICH ARE THE BEST FOODS </pattern>
+  <template>#19$</template></category>
+<category><pattern> WHAT CAN HE EAT </pattern>
+  <template>#19$</template></category>
+<category><pattern> WHAT IS HE ALLOWED TO EAT </pattern>
+  <template>#19$</template></category>
+  
 
 <!-- miscelaneus -->
 <category>
