@@ -54,7 +54,7 @@ kern.bootstrap(learnFiles="mybot-basic.xml")
 
 from keras.models import load_model
 # load model
-model = load_model('classy_weights.h5')
+model = load_model('weights.h5')
 print('Model loaded')
 # summarize model.
 # model.summary()
