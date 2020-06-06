@@ -1,5 +1,4 @@
 # Rule-Based-Chatbot
-Ruled based chatbot that implements different AI topics <br/>
 The chatbot was composed in 4 phases: <br/>
 Phase 1.0: Implements rules in the AIML file (the .xml file), and it implements a similarity-based component based on the bag-of-words model, tf/idf, and cosine similarity. <br/>
 <br/>
