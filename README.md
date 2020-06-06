@@ -12,9 +12,12 @@ Phase 3.0: Implements NLTK based code that translates natural language sentences
 <br/>
 <img src="images/first-order-logic.png" width="400" height="300" class="center">
 <br/>
-Phase 4.0: Implements a pre-trained transformer network (https://www.tensorflow.org/tutorials/text/transformer) that predicts a reply sentence when the pattern input is not matched with any rule. Also implements a genetic algorithm that is used to calculate the name of the dog food that has the most protein percentage per money spent from a toy-world dataset. <br/>
+Phase 4.0: A. Implements a pre-trained transformer network (https://www.tensorflow.org/tutorials/text/transformer) that predicts a reply sentence when the pattern input is not matched with any rule. B. Also implements a genetic algorithm that is used to calculate the name of the dog food that has the most protein percentage per money spent from a toy-world dataset. <br/>
 <br/>
+A. <br/>
 <img src="images/transformer-net.png" width="500" height="300" class="center">
+<br/>
+B. <br/>
 <img src="images/genetic-algorithm.png" width="500" height="300" class="center">
 <br/>
 ### Dataset for the image classification
